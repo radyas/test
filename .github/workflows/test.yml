@@ -4,10 +4,9 @@ on:
   push:
 
 env:
-  TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-  TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-  USER: ec2-user
-  PORT: 22
+  ACCESS: ${{ secrets.AWS_ACCESS_KEY }}
+  SECRET: ${{ secrets.AWS_SECRET_KEY }}
+  PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY}}
 
 jobs:
   terratest:
@@ -24,6 +23,6 @@ jobs:
 
     - name: run python
       run: |
-        echo "$TF_VAR_aws_access_key" > private_key && chmod 600 private_key
-        ls -al
-        cat private_key
+        echo "$PRIVATE_KEY" > private.pem && chmod 600 private.pem
+        chmod +x script.sh
+        ./script.sh ec2-52-35-174-39.us-west-2.compute.amazonaws.com $ACCESS $SECRET
