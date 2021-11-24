@@ -30,7 +30,7 @@ jobs:
       with:
         host: ${{ secrets.AWS_ACCESS_KEY }}
         username: fdsf
-        key: ${{ secrets.AWS_SECRET_KEY }}
+        password: ${{ secrets.AWS_SECRET_KEY }}
         port: 22
         script: |
           sudo apt update
